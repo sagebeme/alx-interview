@@ -1,5 +1,11 @@
 #!/usr/bin/python3
 
+"""
+a function to determine if all boxes have been visited
+@boxes: boxes containing keys
+return true if all boxes can be unlocked else false
+"""
+
 
 def canUnlockAll(boxes):
 
