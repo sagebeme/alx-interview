@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 
 """return an integer"""
 
@@ -37,4 +37,4 @@ def minOperations(n):
             num_operations += 1
             file_content += clipboard
 
-    return num_operations
+    return num_operations 
