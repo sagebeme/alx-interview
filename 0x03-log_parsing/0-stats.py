@@ -1,11 +1,12 @@
 #!/usr/bin/python3
+
 import sys
 
 
 def print_stats(total_size, status_codes):
     """
-    This function takes in two arguments: `total_size`,
-    which is the sum of all previous file sizes, and `status_codes`,
+    This function takes in two arguments: total_size,
+    which is the sum of all previous file sizes, and status_codes,
     which is a dictionary of status codes and the number of times
     they've appeared in the input.
     The function prints out the file size and the number of lines
@@ -26,6 +27,8 @@ try:
     for line in sys.stdin:
         try:
             fields = line.strip().split()
+            if len(fields) != 7:
+                continue
             ip_address = fields[0]
             status_code = int(fields[-2])
             file_size = int(fields[-1])
