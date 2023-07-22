@@ -1,15 +1,22 @@
 #!/usr/bin/env python3
 import sys
 
+
 def print_stats(total_size, status_codes):
     """
-    prints out the status
+    This function takes in two arguments: `total_size`,
+    which is the sum of all previous file sizes, and `status_codes`,
+    which is a dictionary of status codes and the number of times
+    they've appeared in the input.
+    The function prints out the file size and the number of lines
+    for each status code in ascending order.
     """
     print("File size: {}".format(total_size))
     for status_code in sorted(status_codes.keys()):
         if status_codes[status_code] > 0:
             print("{}: {}".format(status_code, status_codes[status_code]))
     print()
+
 
 total_size = 0
 status_codes = {200: 0, 301: 0, 400: 0, 401: 0, 403: 0, 404: 0, 405: 0, 500: 0}
