@@ -1,22 +1,21 @@
 #!/usr/bin/python3
-""" logs"""
+"""Python script that reads stdin line by line and computes metrics"""
 
 import sys
 
 
-def _print(total_file_size, status):
-    """function to print total file size and status codes"""
-    print("File size: {:d}".format(total_file_size))
-    for key, value in sorted(statuses.items()):
+def print_n(t_file_size, status):
+    """Prints total file size and status list"""
+    print("File size: {:d}".format(t_file_size))
+    for key, value in sorted(status.items()):
         if value != 0:
             print("{}: {}".format(key, value))
 
 
-statuses = {
-        '200': 0, '301': 0,
-        '400': 0, '401': 0, '403': 0, '404': 0, '405': 0, '500': 0}
+status = {'200': 0, '301': 0, '400': 0, '401': 0,
+          '403': 0, '404': 0, '405': 0, '500': 0}
 
-total_file_size = 0
+t_file_size = 0
 count = 0
 try:
     for line in sys.stdin:
@@ -26,18 +25,18 @@ try:
             status_code = args[-2]
             file_size = int(args[-1])
 
-            if status_code in statuses:
-                statuses[status_code] += 1
+            if status_code in status:
+                status[status_code] += 1
 
-            total_file_size += file_size
+            t_file_size += file_size
             count += 1
 
             if count == 10:
-                _print(total_file_size, statuses)
+                print_n(t_file_size, status)
                 count = 0
 
 except KeyboardInterrupt:
     pass
 
 finally:
-    _print(total_file_size, statuses)
+    print_n(t_file_size, status)
