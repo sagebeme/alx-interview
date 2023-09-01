@@ -1,6 +1,12 @@
 #!/usr/bin/python3
 
 def island_perimeter(grid):
+    """Getting the perimeter of island
+
+    Args:
+        grid (_type_): the grid containing
+        the island
+    """
     def dfs(r, c):
         """
         Purpose: Function that calculates horizontal and vertical connections.
