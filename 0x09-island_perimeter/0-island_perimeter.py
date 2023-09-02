@@ -42,3 +42,4 @@ def island_perimeter(grid):
             if grid[r][c] == 1:
                 per_island += dfs(r, c)
     return per_island
+
