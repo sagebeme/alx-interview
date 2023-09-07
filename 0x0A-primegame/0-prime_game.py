@@ -19,7 +19,7 @@ def isWinner(x, nums):
 
     def rounds_played(n):
         """
-        number of rounds played
+        Determines the player that starts a round
         """
         if n == 1:
             return "Ben"
@@ -29,7 +29,7 @@ def isWinner(x, nums):
     maria_wins = 0
     ben_wins = 0
 
-    for n in nums:
+    for n in nums[:x]:
         winner = rounds_played(n)
         queue = [(n, "Maria")]
 
