@@ -1,44 +1,61 @@
 #!/usr/bin/python3
-"""
-Define isWineer function, a solution to the Prime Game problem
-"""
 
-
-def primes(n):
-    """Return list of prime numbers between 1 and n inclusive
-        Args:
-        n (int): upper boundary of range. lower boundary is always 1
-    """
-    prime = []
-    sieve = [True] * (n + 1)
-    for p in range(2, n + 1):
-        if (sieve[p]):
-            prime.append(p)
-            for i in range(p, n + 1, p):
-                sieve[i] = False
-    return prime
+"""
+    Algorithm of  the prime game
+"""
 
 
 def isWinner(x, nums):
     """
-    Determines winner of Prime Game
-    Args:
-        x (int): no. of rounds of game
-        nums (int): upper limit of range for each round
-    Return:
-        Name of winner (Maria or Ben) or None if winner cannot be found
+    checks the winner of a round
     """
-    if x is None or nums is None or x == 0 or nums == []:
+
+    def is_prime(num):
+        """
+        checks for a prime number
+        """
+        if num < 2:
+            return False
+        for i in range(2, int(num**0.5) + 1):
+            if num % i == 0:
+                return False
+            return True
+
+    def rounds_played(n):
+        """
+        Determines the player that starts a round
+        """
+        if n == 1:
+            return "Ben"
+        if n % 2 == 0:
+            return "Maria"
+
+    maria_wins = 0
+    ben_wins = 0
+
+    for n in nums[:x]:
+        winner = rounds_played(n)
+        queue = [(n, "Maria")]
+
+        while queue:
+            current_n, current_player = queue.pop(0)
+
+            if current_n == 1:
+                if current_player == "Maria":
+                    ben_wins += 1
+                else:
+                    maria_wins += 1
+                break
+
+            for i in range(2, current_n + 1):
+                if is_prime(i):
+                    new_n = current_n - i * (current_n // i)
+                    new_player = "Maria" if current_player == "Ben" else "Ben"
+                    queue.append((new_n, new_player))
+
+    if maria_wins > ben_wins:
+        return "Maria"
+    elif ben_wins > maria_wins:
+        return "Ben"
+    else:
         return None
-    Maria = Ben = 0
-    for i in range(x):
-        prime = primes(nums[i])
-        if len(prime) % 2 == 0:
-            Ben += 1
-        else:
-            Maria += 1
-    if Maria > Ben:
-        return 'Maria'
-    elif Ben > Maria:
-        return 'Ben'
-    return None
