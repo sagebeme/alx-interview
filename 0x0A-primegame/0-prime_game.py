@@ -1,5 +1,9 @@
 #!/usr/bin/python3
 
+"""
+    Algorithm of  the prime game
+"""
+
 
 def isWinner(x, nums):
     """
