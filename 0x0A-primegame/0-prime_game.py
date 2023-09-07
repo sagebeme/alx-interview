@@ -5,6 +5,7 @@ def isWinner(x, nums):
     """
     checks the winner of a round
     """
+
     def is_prime(num):
         """
         checks for a prime number
