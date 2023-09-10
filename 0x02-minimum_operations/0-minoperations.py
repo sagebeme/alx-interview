@@ -1,40 +1,31 @@
 #!/usr/bin/python3
+"""
+In a text file, there is a single character H. Your text editor
+can execute only two operations in this file: Copy All and Paste.
+Given a number n, write a method that calculates the fewest number
+of operations needed to result in exactly n H characters in the file.
 
-"""return an integer"""
+"""
+
+
+def countProcess(num):
+    """ Return list of process until n H """
+    con = 1
+    p_list = []
+    val = num
+    while val != 1:
+        con += 1
+        if val % con == 0:
+            while (val % con == 0 and val != 1):
+                val /= con
+                p_list.append(con)
+
+    return p_list
 
 
 def minOperations(n):
-    """
-    Calculates the fewest number of operations needed to result in exactly n H characters in the file.
-
-    Args:
-        n (int): The desired number of H characters.
-
-    Returns:
-        int: The fewest number of operations needed.
-
-    """
-
-    # If n is less than 2, it is impossible to achieve
-    if n < 2:
+    """ Return sum of process until n H """
+    if n < 2 or type(n) is not int:
         return 0
-
-    # Initialize the number of operations and the clipboard with 1 H character
-    num_operations = 0
-    clipboard = 1
-
-    # Start with 2 H characters already in the file
-    file_content = 2
-
-    while file_content < n:
-        if n % file_content == 0:
-            # If the current file content is a factor of n, we can Copy All and Paste multiple times
-            num_paste_operations = n // file_content - 1
-            num_operations += num_paste_operations + 1
-            clipboard = file_content
-        else:
-            # If the current file content is not a factor of n, we can only Paste
-            num_operations += 1
-            file_content += clipboard
-
-    return num_operations 
+    values = countProcess(n)
+    return sum(values)
