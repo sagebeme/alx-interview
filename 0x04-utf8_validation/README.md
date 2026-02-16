@@ -1,58 +1,26 @@
-# 0x04. UTF-8 Validation
-## Resources
-### Read or watch:
+0x04. UTF-8 validation
+======================
 
-- [UTF-8](https://en.wikipedia.org/wiki/UTF-8)
-- [Characters, Symbols, and the Unicode Miracle](https://www.youtube.com/watch?v=MijmeoH9LT4)
+This project implements **UTF-8 validation**: given a list of integers (each representing one byte), determine if the sequence is valid UTF-8. You practice bit manipulation and the UTF-8 encoding rules.
 
-## Requirements
-### General
-- Allowed editors: ```vi```, ```vim```, ```emacs```
-- All your files will be compiled on Ubuntu 14.04 LTS using python3 (version 3.4.3)
-- All your files should end with a new line
-- The first line of all your files should be exactly ```#!/usr/bin/python3```
-- A ```README.md``` file, at the root of the folder of the project, is mandatory
-- Your code should use the ```PEP 8``` style (version 1.7.x)
-- All your files must be executable
+Tasks
+-----
 
-## Tasks
-```0. UTF-8 Validation                                                              mandatory```
+### 0. UTF-8 validation
 
-Write a method that determines if a given data set represents a valid UTF-8 encoding.
+mandatory
 
-- Prototype: def validUTF8(data)
-- Return: True if data is a valid UTF-8 encoding, else return False
-- A character in UTF-8 can be 1 to 4 bytes long
-- The data set can contain multiple characters
-- The data will be represented by a list of integers
-- Each integer represents 1 byte of data, therefore you only need to handle the 8 least significant bits of each integer
-```
-carrie@ubuntu:~/0x04-utf8_validation$ cat 0-main.py
-#!/usr/bin/python3
-"""
-Main file for testing
-"""
+Implement a function `validUTF8(data)` that returns True if the list of integers is valid UTF-8, False otherwise. Multi-byte characters follow the leading byte pattern (e.g. 110xxxxx for 2-byte). Run: `python3 0-main.py` or import and call with a list.
 
-validUTF8 = __import__('0-validate_utf8').validUTF8
+**Repo:**
 
-data = [65]
-print(validUTF8(data))
+-   GitHub repository: `alx-interview`
+-   Directory: `0x04-utf8_validation`
+-   File: (main solution file)
 
-data = [80, 121, 116, 104, 111, 110, 32, 105, 115, 32, 99, 111, 111, 108, 33]
-print(validUTF8(data))
+---
 
-data = [229, 65, 127, 256]
-print(validUTF8(data))
+**How to do the exercises yourself**
 
-carrie@ubuntu:~/0x04-utf8_validation$
-carrie@ubuntu:~/0x04-utf8_validation$ ./0-main.py
-True
-True
-False
-carrie@ubuntu:~/0x04-utf8_validation$
-```
-Repo:
-
-- GitHub repository: alx-interview
-- Directory: 0x04-utf8_validation
-- File: 0-validate_utf8.py
+1. Check the leading byte to see how many continuation bytes (10xxxxxx) follow.
+2. Validate each continuation byte and advance; return False on any invalid sequence.
